@@ -56,7 +56,7 @@ export APICAST_SELF_MANAGED_PRODUCTION_WILDCARD_DOMAIN=production.$OPENSHIFT_ROU
 ```sh
 oc create project api-gateway
 oc create secret generic 3scale-tenant --from-literal=password=https://$SAAS_ACCESS_TOKEN@$SAAS_TENANT-admin.3scale.net
-oc create -f https://raw.githubusercontent.com/3scale/apicast/v3.4.0/openshift/apicast-template.yml
+oc create -f https://raw.githubusercontent.com/3scale/3scale-amp-openshift-templates/2.6.0.GA/apicast-gateway/apicast.yml
 oc new-app --template=3scale-gateway --name=apicast-staging -p CONFIGURATION_URL_SECRET=3scale-tenant -p CONFIGURATION_CACHE=0 -p RESPONSE_CODES=true -p LOG_LEVEL=info -p CONFIGURATION_LOADER=lazy -p APICAST_NAME=apicast-staging -p DEPLOYMENT_ENVIRONMENT=sandbox -p IMAGE_NAME=registry.redhat.io/3scale-amp26/apicast-gateway
 oc new-app --template=3scale-gateway --name=apicast-production -p CONFIGURATION_URL_SECRET=3scale-tenant -p CONFIGURATION_CACHE=60 -p RESPONSE_CODES=true -p LOG_LEVEL=info -p CONFIGURATION_LOADER=boot -p APICAST_NAME=apicast-production -p DEPLOYMENT_ENVIRONMENT=production -p IMAGE_NAME=registry.redhat.io/3scale-amp26/apicast-gateway
 oc scale dc/apicast-staging --replicas=1
