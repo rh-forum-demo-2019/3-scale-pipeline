@@ -22,7 +22,8 @@ node() {
                        publicProductionWildcardDomain: params.PUBLIC_PRODUCTION_WILDCARD_DOMAIN ],
         toolbox: [ openshiftProject: params.NAMESPACE,
                    destination: params.TARGET_INSTANCE,
-                   insecure: params.DISABLE_TLS_VALIDATION == "yes",
+                   image: "quay.io/redhat/3scale-toolbox:master", // TODO: remove me once the final image is released
+                   insecure: params.DISABLE_TLS_VALIDATION == "no",
                    secretName: params.SECRET_NAME],
         service: [:],
         applications: [
