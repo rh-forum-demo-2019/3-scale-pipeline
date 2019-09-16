@@ -27,7 +27,7 @@ export SAAS_TENANT=mdiwing-redhat
 - Saver the **Developer** Account ID that is the last part of the URL (after **/buyers/accounts/**)
 
 ```sh
-export SAAS_DEVELOPER_ACCOUNT_ID=2445582535751
+export SAAS_DEVELOPER_ACCOUNT_ID=2445582746132
 ```
 
 ## Generate the 3scale toolbox secret
