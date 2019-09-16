@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Beer Catalog API",
+    "title": "Beer Catalog API (v1.0)",
     "description": "An API for querying beer catalog of Acme Inc.",
     "contact": {
       "name": "Laurent Broudoux",
@@ -39,7 +39,15 @@
           "description": "Name of beer to retrieve",
           "required": true,
           "type": "string"
-        }
+        },
+        {
+    	"name": "api-key",
+    	"description": "Your access API Key",
+    	"type": "string",
+    	"in": "header",
+    	"x-data-threescale-name": "user_keys",
+    	"required": true
+  		}
       ]
     },
     "/beer/findByStatus/{status}": {
@@ -75,7 +83,15 @@
           "in": "query",
           "description": "Number of page to retrieve",
           "type": "number"
-        }
+        },
+        {
+    	"name": "api-key",
+    	"description": "Your access API Key",
+    	"type": "string",
+    	"in": "header",
+    	"x-data-threescale-name": "user_keys",
+    	"required": true
+  		}
       ]
     },
     "/beer": {
@@ -104,7 +120,15 @@
           "in": "query",
           "description": "Number of page to retrieve",
           "type": "number"
-        }
+        },
+        {
+    	"name": "api-key",
+    	"description": "Your access API Key",
+    	"type": "string",
+    	"in": "header",
+    	"x-data-threescale-name": "user_keys",
+    	"required": true
+  		}
       ]
     }
   },
@@ -141,15 +165,17 @@
     }
   },
   "securityDefinitions": {
-   "api-key": {
-     "type": "apiKey",
-     "name": "api-key",
-     "in": "header"
-   }
- },
- "security": [
-   {
-     "api-key": []
-   }
- ]
+    "api-key": {
+      "type": "apiKey",
+      "name": "api-key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "api-key": [
+
+      ]
+    }
+  ]
 }
