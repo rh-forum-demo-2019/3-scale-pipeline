@@ -52,7 +52,6 @@ node() {
     service.applyApplication()
   }
 
-  /*
   stage("Run integration tests") {
     // To run the integration tests when using APIcast SaaS instances, we need
     // to fetch the proxy definition to extract the staging public url
@@ -66,7 +65,6 @@ node() {
     curl -sfk -w "FindBeersByStatus: %{http_code}\n" -o /dev/null ${proxy.sandbox_endpoint}/api/beer/findByStatus/available -H 'api-key: ${userkey}'
     """
   }
-  */
 
   stage("Promote to production") {
     service.promoteToProduction()
