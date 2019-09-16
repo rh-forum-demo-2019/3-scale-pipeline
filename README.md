@@ -19,7 +19,7 @@ export SAAS_ACCESS_TOKEN=123...456
 - Save the name of your 3scale tenant (the string before `-admin.3scale.net` in your Admin Console) for later use
 
 ```sh
-export SAAS_TENANT=nmasse-redhat
+export SAAS_TENANT=mdiwing-redhat
 ```
 
 - Navigate to **Audience** > **Accounts** > **Listing**
