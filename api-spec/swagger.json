@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Beer Catalog API (v1.0)",
+    "title": "Beer Catalog API",
     "description": "An API for querying beer catalog of Acme Inc.",
     "contact": {
       "name": "Laurent Broudoux",
