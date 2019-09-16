@@ -64,3 +64,16 @@ oc scale dc/apicast-production --replicas=1
 oc expose service apicast-staging --hostname=$APICAST_SELF_MANAGED_STAGING_WILDCARD_DOMAIN
 oc expose service apicast-production --hostname=$APICAST_SELF_MANAGED_PRODUCTION_WILDCARD_DOMAIN
 ```
+## Install the Jenkins Pipeline
+
+- Use setup.yaml from the GitHub repo: https://github.com/rh-forum-demo-2019/3-scale-pipeline.git
+
+- Get the route for the API that you want to expose over 3scale and define it in API_HOSTNAME, see example below:
+
+```sh
+export API_HOSTNAME="$(oc get route -n "beer-demo-qa" fuse-implementation -o jsonpath='{.spec.host}')"
+```
+- Install the pipeline and provide pipeline configuration:
+```sh
+oc process -f jenkins/setup.yaml -p DEVELOPER_ACCOUNT_ID=”$SAAS_DEVELOPER_ACCOUNT_ID” -p PRIVATE_BASE_URL=”http://$API_HOSTNAME” -p TARGET_INSTANCE=3scale-saas -p PUBLIC_STAGING_WILDCARD_DOMAIN=”$APICAST_SELF_MANAGED_STAGING_WILDCARD_DOMAIN” -p PUBLIC_PRODUCTION_WILDCARD_DOMAIN="$APICAST_SELF_MANAGED_PRODUCTION_WILDCARD_DOMAIN" -p NAMESPACE=$TOOLBOX_NAMESPACE |oc create -f -
+``
