@@ -47,8 +47,8 @@ oc create secret generic 3scale-toolbox -n "$TOOLBOX_NAMESPACE" --from-file="$HO
 
 ```sh
 export OPENSHIFT_ROUTER_SUFFIX=your-cluster.domain.com
-export APICAST_SELF_MANAGED_STAGING_WILDCARD_DOMAIN=staging.$OPENSHIFT_ROUTER_SUFFIX
-export APICAST_SELF_MANAGED_PRODUCTION_WILDCARD_DOMAIN=production.$OPENSHIFT_ROUTER_SUFFIX
+export APICAST_SELF_MANAGED_STAGING_WILDCARD_DOMAIN="gw-staging.$OPENSHIFT_ROUTER_SUFFIX"
+export APICAST_SELF_MANAGED_PRODUCTION_WILDCARD_DOMAIN="gw-production.$OPENSHIFT_ROUTER_SUFFIX"
 ```
 
 - Deploy APIcast instances (in the project of your choice) to be used with 3scale SaaS as self-managed instances:
@@ -61,8 +61,9 @@ oc new-app --template=3scale-gateway --name=apicast-staging -p CONFIGURATION_URL
 oc new-app --template=3scale-gateway --name=apicast-production -p CONFIGURATION_URL_SECRET=3scale-tenant -p CONFIGURATION_CACHE=60 -p RESPONSE_CODES=true -p LOG_LEVEL=info -p CONFIGURATION_LOADER=boot -p APICAST_NAME=apicast-production -p DEPLOYMENT_ENVIRONMENT=production -p IMAGE_NAME=registry.redhat.io/3scale-amp26/apicast-gateway
 oc scale dc/apicast-staging --replicas=1
 oc scale dc/apicast-production --replicas=1
-oc expose service apicast-staging --hostname=$APICAST_SELF_MANAGED_STAGING_WILDCARD_DOMAIN
-oc expose service apicast-production --hostname=$APICAST_SELF_MANAGED_PRODUCTION_WILDCARD_DOMAIN
+oc create route edge apicast-wildcard-staging --service=apicast-staging --hostname="wildcard.$APICAST_SELF_MANAGED_STAGING_WILDCARD_DOMAIN" --insecure-policy=Allow --wildcard-policy=Subdomain
+oc create route edge apicast-wildcard-production --service=apicast-production --hostname="wildcard.$APICAST_SELF_MANAGED_PRODUCTION_WILDCARD_DOMAIN" --insecure-policy=Allow --wildcard-policy=Subdomain
+
 ```
 ## Install the Jenkins Pipeline
 
