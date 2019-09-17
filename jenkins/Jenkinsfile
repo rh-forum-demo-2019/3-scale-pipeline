@@ -15,7 +15,7 @@ node() {
   stage("Prepare") {
     service = toolbox.prepareThreescaleService(
         openapi: [filename: "api-spec/swagger.json"],
-        environment: [ baseSystemName: "beer_api",
+        environment: [ baseSystemName: "beer_catalog",
                        privateBaseUrl: params.PRIVATE_BASE_URL,
                        privateBasePath: "/rest",
                        publicStagingWildcardDomain: params.PUBLIC_STAGING_WILDCARD_DOMAIN,
