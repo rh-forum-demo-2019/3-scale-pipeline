@@ -10,21 +10,14 @@ def service = null
 node() {
   stage('Checkout Source') {
     checkout scm
-
-    script {
-            fileOperations([
-                    fileDownloadOperation(
-                            password: '',
-                            targetFileName: 'swagger.json',
-                            targetLocation: "${WORKSPACE}",
-                            url: 'https://raw.githubusercontent.com/rh-forum-demo-2019/apicurio-modeling/master/apicurio/src/spec/beer-catalog-API.json',
-                            userName: ''),
-    
+    dir('artifacts') {
+        git url: 'https://github.com/rh-forum-demo-2019/apicurio-modeling.git' // clones repo to subdir
+    }
   }
 
   stage("Prepare") {
     service = toolbox.prepareThreescaleService(
-        openapi: [filename: "swagger.json"],
+        openapi: [filename: "artifacts/apicurio/src/spec/beer-catalog-API.json"],
         environment: [ baseSystemName: "beer_catalog_prod",
                        privateBaseUrl: params.PRIVATE_BASE_URL,
                        privateBasePath: "/rest",
