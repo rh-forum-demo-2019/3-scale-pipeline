@@ -33,9 +33,9 @@ node() {
             [ name: "beer-test-app", description: "This is used for tests of Beer Catalog API", plan: "test", account: params.DEVELOPER_ACCOUNT_ID ]
         ],
         applicationPlans: [
-          [ systemName: "test", name: "Test", defaultPlan: true, published: true ],
-          [ systemName: "silver", name: "Silver" ],
-          [ systemName: "gold", name: "Gold" ],
+          [ systemName: "test", name: "Test Plan", defaultPlan: true, published: true ],
+          [ systemName: "silver", name: "Silver Plan" ],
+          [ systemName: "gold", name: "Gold Plan" ],
         ]
     )
 
