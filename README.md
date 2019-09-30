@@ -54,7 +54,7 @@ export APICAST_SELF_MANAGED_PRODUCTION_WILDCARD_DOMAIN="gw-production.$OPENSHIFT
 - Deploy APIcast instances (in the project of your choice) to be used with 3scale SaaS as self-managed instances:
 
 ```sh
-oc create project api-gateway
+oc new-project api-gateway
 oc create secret generic 3scale-tenant --from-literal=password=https://$SAAS_ACCESS_TOKEN@$SAAS_TENANT-admin.3scale.net
 oc create -f https://raw.githubusercontent.com/3scale/3scale-amp-openshift-templates/2.6.0.GA/apicast-gateway/apicast.yml
 oc new-app --template=3scale-gateway --name=apicast-staging -p CONFIGURATION_URL_SECRET=3scale-tenant -p CONFIGURATION_CACHE=0 -p RESPONSE_CODES=true -p LOG_LEVEL=info -p CONFIGURATION_LOADER=lazy -p APICAST_NAME=apicast-staging -p DEPLOYMENT_ENVIRONMENT=sandbox -p IMAGE_NAME=registry.redhat.io/3scale-amp26/apicast-gateway
