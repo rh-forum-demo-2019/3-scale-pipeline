@@ -18,7 +18,7 @@ node() {
   stage("Prepare") {
     service = toolbox.prepareThreescaleService(
         openapi: [filename: "artifacts/apicurio/src/spec/beer-catalog-API.json"],
-        environment: [ baseSystemName: "beer_catalog_prod",
+        environment: [ baseSystemName: "beer_catalog",
                        privateBaseUrl: params.PRIVATE_BASE_URL,
                        privateBasePath: "/rest",
                        publicStagingWildcardDomain: params.PUBLIC_STAGING_WILDCARD_DOMAIN,
@@ -30,7 +30,7 @@ node() {
                    secretName: params.SECRET_NAME],
         service: [:],
         applications: [
-            [ name: "my-test-app", description: "This is used for tests", plan: "test", account: params.DEVELOPER_ACCOUNT_ID ]
+            [ name: "beer-test-app", description: "This is used for tests of Beer Catalog API", plan: "test", account: params.DEVELOPER_ACCOUNT_ID ]
         ],
         applicationPlans: [
           [ systemName: "test", name: "Test", defaultPlan: true, published: true ],
