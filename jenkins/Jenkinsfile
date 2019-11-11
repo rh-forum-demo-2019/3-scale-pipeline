@@ -21,8 +21,8 @@ node() {
         environment: [ baseSystemName: "beer_catalog",
                        privateBaseUrl: params.PRIVATE_BASE_URL,
                        privateBasePath: "/api",
-                       publicStagingBaseURL: params.PUBLIC_STAGING_WILDCARD_DOMAIN,
-                       publicProductionBaseURL: params.PUBLIC_PRODUCTION_WILDCARD_DOMAIN,
+                       publicStagingWildcardDomain: params.PUBLIC_STAGING_WILDCARD_DOMAIN != "" ? params.PUBLIC_STAGING_WILDCARD_DOMAIN : null,
+                       publicProductionWildcardDomain: params.PUBLIC_PRODUCTION_WILDCARD_DOMAIN != "" ? params.PUBLIC_PRODUCTION_WILDCARD_DOMAIN : null
                        //publicStagingWildcardDomain: params.PUBLIC_STAGING_WILDCARD_DOMAIN,
                        //publicProductionWildcardDomain: params.PUBLIC_PRODUCTION_WILDCARD_DOMAIN 
                      ],
