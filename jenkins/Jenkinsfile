@@ -22,7 +22,8 @@ node() {
                        privateBaseUrl: params.PRIVATE_BASE_URL,
                        privateBasePath: "/api",
                        //publicStagingWildcardDomain: params.PUBLIC_STAGING_WILDCARD_DOMAIN,
-                       //publicProductionWildcardDomain: params.PUBLIC_PRODUCTION_WILDCARD_DOMAIN ],
+                       //publicProductionWildcardDomain: params.PUBLIC_PRODUCTION_WILDCARD_DOMAIN 
+                     ],
         toolbox: [ openshiftProject: params.NAMESPACE,
                    destination: params.TARGET_INSTANCE,
                    image: "quay.io/redhat/3scale-toolbox:master", // TODO: remove me once the final image is released
