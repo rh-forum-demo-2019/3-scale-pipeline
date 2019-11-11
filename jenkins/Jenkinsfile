@@ -21,6 +21,8 @@ node() {
         environment: [ baseSystemName: "beer_catalog",
                        privateBaseUrl: params.PRIVATE_BASE_URL,
                        privateBasePath: "/api",
+                       publicStagingBaseURL: params.PUBLIC_STAGING_WILDCARD_DOMAIN,
+                       publicProductionBaseURL: params.PUBLIC_PRODUCTION_WILDCARD_DOMAIN,
                        //publicStagingWildcardDomain: params.PUBLIC_STAGING_WILDCARD_DOMAIN,
                        //publicProductionWildcardDomain: params.PUBLIC_PRODUCTION_WILDCARD_DOMAIN 
                      ],
@@ -63,15 +65,15 @@ node() {
     //def proxy = [
        //endpoint: service.environment.productionPublicBaseURL,
        //sandbox_endpoint: service.environment.stagingPublicBaseURL
-    //def proxy = service.readProxy("sandbox")
-    //def userkey = service.applications[0].userkey
-    //sh """set -e
-    //echo "Public Staging Base URL is ${proxy.sandbox_endpoint}"
-    //echo "userkey is ${userkey}"
-    //curl -sfk -w "ListBeers: %{http_code}\n" -o /dev/null ${proxy.sandbox_endpoint}/beer -H 'api-key: ${userkey}'
-    //curl -sfk -w "GetBeer: %{http_code}\n" -o /dev/null ${proxy.sandbox_endpoint}/beer/Weissbier -H 'api-key: ${userkey}'
-    //curl -sfk -w "FindBeersByStatus: %{http_code}\n" -o /dev/null ${proxy.sandbox_endpoint}/beer/findByStatus/available -H 'api-key: ${userkey}'
-    //"""
+    def proxy = service.readProxy("sandbox")
+    def userkey = service.applications[0].userkey
+    sh """set -e
+    echo "Public Staging Base URL is ${proxy.sandbox_endpoint}"
+    echo "userkey is ${userkey}"
+    curl -sfk -w "ListBeers: %{http_code}\n" -o /dev/null ${proxy.sandbox_endpoint}/beer -H 'api-key: ${userkey}'
+    curl -sfk -w "GetBeer: %{http_code}\n" -o /dev/null ${proxy.sandbox_endpoint}/beer/Weissbier -H 'api-key: ${userkey}'
+    curl -sfk -w "FindBeersByStatus: %{http_code}\n" -o /dev/null ${proxy.sandbox_endpoint}/beer/findByStatus/available -H 'api-key: ${userkey}'
+    """
   }
 
   stage("Promote to production") {
